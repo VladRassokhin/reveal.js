@@ -1,8 +1,36 @@
-$(document).ready(function () {
+$(document).ready(function() {
+
+    var styleMappings = [
+        ['resharper-slide', 'resharper-background'],
+        ['dottrace-slide', 'dottrace-background'],
+        ['dotcover-slide', 'dotcover-background'],
+        ['dotmemory-slide', 'dotmemory-background'],
+        ['dotpeek-slide', 'dotpeek-background'],
+        ['resharper-cpp-slide', 'resharper-cpp-background'],
+        ['rider-slide', 'rider-background'],
+        ['webstorm-slide', 'webstorm-background'],
+        ['appcode-slide', 'appcode-background'],
+        ['clion-slide', 'clion-background'],
+        ['intellij-slide', 'intellij-background'],
+        ['phpstorm-slide', 'phpstorm-background'],
+        ['pycharm-slide', 'pycharm-background'],
+        ['rubymine-slide', 'rubymine-background'],
+        ['teamcity-slide', 'teamcity-background'],
+        ['upsource-slide', 'upsource-background'],
+        ['youtrack-slide', 'youtrack-background'],
+        ['kotlin-slide', 'kotlin-background'],
+        ['datagrip-slide', 'datagrip-background'],
+        ['hub-slide', 'hub-background'],
+        ['mps-slide', 'mps-background'],
+    ];
+
+    selectBackground(styleMappings);
+
     var initialConfig = $.extend({}, Reveal.getConfig());
 
-    function initStuff(event) {
-        selectBackground();
+    // Video slide handler
+    Reveal.addEventListener('slidechanged', function (event) {
+        selectBackground(styleMappings);
 
         var video = event.currentSlide.querySelector('video');
         var hasVideo = video != null;
@@ -32,59 +60,36 @@ $(document).ready(function () {
                 height: viewport.height
             });
 
-            $('body').addClass('fullscreen-mode');
+            $('body').addClass('blank-background');
         } else {
-            $('body').removeClass('fullscreen-mode');
+            $('body').removeClass('blank-background');
         }
 
         Reveal.configure(config);
-    }
+    });
 
-    Reveal.addEventListener('ready', initStuff);
-    Reveal.addEventListener('slidechanged', initStuff);
 });
 
-function selectBackground() {
+function selectBackground(styleMappings) {
     var currentSection = $('section.present');
-    var matchingProductFound = false;
 
-    for (var product in allProducts) {
+    var matchingStyles = [];
 
-        if ($(currentSection).attr('data-product') == allProducts[product]) {
-            $('body').removeClass().addClass(allProducts[product].concat('-background'));
-            matchingProductFound = true;
+    for (var i = 0; i < styleMappings.length; i++) {
+
+        var oneOfValidSectionStyles = styleMappings[i][0];
+
+        if ($(currentSection).hasClass(oneOfValidSectionStyles)) {
+            matchingStyles.push(oneOfValidSectionStyles);
+
+            $('body').removeClass().addClass(styleMappings[i][1]);
+
             break;
         }
     }
 
-    if (matchingProductFound == false) {
+    if (matchingStyles.length === 0) {
         $('body').removeClass().addClass('default-background');
     }
 }
 
-function handleActiveProducts() {
-    if (!currentPlaylist) {
-        return;
-    }
-
-    var slidesToRemove = [];
-    var products = [];
-
-    $('.slides section').each(function () {
-        var $slide = $(this);
-        var slideProduct = $slide.attr('data-product');
-        products.push(slideProduct);
-
-        if (currentPlaylist.indexOf(slideProduct) == -1) {
-            slidesToRemove.push($slide);
-        }
-    });
-
-    products = $.unique(products);
-
-    $(slidesToRemove).each(function () {
-        $(this).remove();
-    });
-
-    console.log('Available products: %s', products.join(', '));
-}
