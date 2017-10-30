@@ -66,7 +66,14 @@ function selectBackground() {
 
 function handleActiveProducts() {
     if (!currentPlaylist) {
-        return;
+        currentPlaylist = ['unconfigured'];
+    }
+    if (currentPlaylist == 'unconfigured') {
+        var list = Object.keys(conferenceType);
+        var ol = $('#avalable-playlists');
+        for (var type in list) {
+            ol.append('<li>' + list[type] + '</li>');
+        }
     }
 
     var slidesToRemove = [];

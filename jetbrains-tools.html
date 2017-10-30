@@ -46,6 +46,26 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
+				<!-- HELP -->
+				<section data-product="unconfigured" data-autoslide="1000000">
+					<h2>Presentation is not configured</h2>
+					<p>Please configure playlist:</p>
+					<ol>
+						<li>
+							<p>Go to <code style="background-color: lightgray">js/playlist.js</code></p>
+						</li>
+						<li>
+							<p>Change variable <code style="background-color: lightgray">currentPlaylist</code> (at the bottom of the file) so that one of the playlists defined in the <code style="background-color: lightgray">conferenceType</code> object defined above.
+								<br/>For example, for a .NET-focused conference, make the following assignment: <code style="background-color: lightgray">var currentPlaylist = conferenceType.dotnet;</code></p>
+						</li>
+						<li>
+							<p>Save changes to <code style="background-color: lightgray">js/playlist.js</code>.</p>
+						</li>
+					</ol>
+					<p>Available playlists:</p>
+					<ul id="avalable-playlists" style="columns: 3; list-style: none"></ul>
+				</section>
+
                 <!--General slides (license giveaways, announcements etc.-->
 
                 <section data-product="general" data-autoslide="20000">
