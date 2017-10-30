@@ -228,7 +228,8 @@
 			'End':					'Last slide',
 			'B  ,  .':				'Pause',
 			'F':					'Fullscreen',
-			'ESC, O':				'Slide overview'
+			'ESC, O':				'Slide overview',
+			'Any other key':		'Pause autoslide'
 		};
 
 	/**
