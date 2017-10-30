@@ -6,7 +6,23 @@ It is based on [reveal.js](https://github.com/hakimel/reveal.js/), a HTML-based 
 
 ## How to set up presentation playback at a conference
 
-1. Download and unpack the latest revision from this repository's `master` branch (unless you have agreed to use a different revision) to an Intel NUC device that will be used to display presentations.
+0. Install git and git-lfs onto Intel NUC (or other device that will be used to display presentations).
+  Comands to run in terminal for Ubuntu 16.04:
+```bash
+sudo apt-get -q update
+sudo apt-get -y install git curl
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get -y install git-lfs
+```
+
+1. Download and prepare this repository:
+```bash
+git lfs clone https://github.com/VladRassokhin/jetbrains-booth-presentations
+```
+In case you want some other branch:
+```bash
+git lfs clone https://github.com/VladRassokhin/jetbrains-booth-presentations --branch <branch> --single-branch
+```
 
 2. If necessary, modify the playlist to match a particular conference type. (See *How to select a playlist* below)
 
